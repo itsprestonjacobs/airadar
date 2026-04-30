@@ -3,6 +3,7 @@ import AlertsBanner from "@/components/AlertsBanner";
 import ConditionsPanel from "@/components/ConditionsPanel";
 import StreamEmbed from "@/components/StreamEmbed";
 import RadarMapLoader from "@/components/RadarMapLoader";
+import UserMenu from "@/components/UserMenu";
 
 const LAT = parseFloat(process.env.LOCATION_LAT ?? "37.5");
 const LON = parseFloat(process.env.LOCATION_LON ?? "-95.5");
@@ -48,17 +49,20 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span
-            className="live-dot w-2 h-2 rounded-full inline-block"
-            style={{ background: "#ef4444" }}
-          />
-          <span
-            className="text-xs font-semibold uppercase tracking-widest"
-            style={{ color: "#ef4444" }}
-          >
-            Live
-          </span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span
+              className="live-dot w-2 h-2 rounded-full inline-block"
+              style={{ background: "#ef4444" }}
+            />
+            <span
+              className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "#ef4444" }}
+            >
+              Live
+            </span>
+          </div>
+          <UserMenu />
         </div>
       </header>
 
