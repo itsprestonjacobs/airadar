@@ -5,16 +5,24 @@ import { prisma } from "./prisma";
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "sqlite" }),
 
+  // Fallback secret for local dev — set BETTER_AUTH_SECRET in prod
+  secret: process.env.BETTER_AUTH_SECRET ?? "local-dev-secret-change-in-production",
+
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
   },
 
   socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    },
+    // Google is optional — only active when env vars are set
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+      ? {
+          google: {
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          },
+        }
+      : {}),
   },
 
   user: {
