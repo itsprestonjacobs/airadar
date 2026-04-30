@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Secrets
+.env
+web/.env.local
+
+# Temp segment files
+/tmp/
+
+# Next.js
+web/.next/
+web/node_modules/
+web/.env.local
+
+# Editor
+.DS_Store
+*.swp

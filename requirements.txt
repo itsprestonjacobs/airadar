@@ -1,0 +1,6 @@
+anthropic>=0.42.0
+elevenlabs>=1.9.0
+Pillow>=10.3.0
+requests>=2.31.0
+sdnotify>=0.3.6
+python-dotenv>=1.0.0

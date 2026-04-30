@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --bg-base: #08101e;
+  --bg-panel: #0f1b30;
+  --bg-card: #131f35;
+  --border: #1e3050;
+  --text-primary: #e8f0ff;
+  --text-secondary: #7a9cc0;
+  --text-dim: #4a6080;
+  --accent: #3b82f6;
+  --accent-glow: #1d4ed8;
+  --alert-bg: #7f1d1d;
+  --alert-text: #fde68a;
+}
+
+@theme inline {
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Leaflet map reset inside dark theme */
+.leaflet-container {
+  background: #08101e !important;
+  font-family: inherit;
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.85) saturate(0.9);
+}
+
+/* Alert scroll animation */
+@keyframes scroll-left {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.alert-scroll {
+  animation: scroll-left 30s linear infinite;
+  white-space: nowrap;
+}
+
+/* Pulse glow for live indicator */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.live-dot {
+  animation: live-pulse 1.5s ease-in-out infinite;
+}

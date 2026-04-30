@@ -1,0 +1,23 @@
+[Unit]
+Description=Radar AI Weather Streaming Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=weatherbot
+WorkingDirectory=/opt/weatherbot
+EnvironmentFile=/opt/weatherbot/.env
+ExecStart=/opt/weatherbot/venv/bin/python main.py
+Restart=on-failure
+RestartSec=15s
+StartLimitBurst=5
+StartLimitIntervalSec=300
+WatchdogSec=120s
+TimeoutStartSec=90s
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=weatherbot
+
+[Install]
+WantedBy=multi-user.target
