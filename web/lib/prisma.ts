@@ -2,7 +2,10 @@ import { PrismaClient } from "@/app/generated/prisma/client";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
 
 function createPrisma() {
-  const url = process.env.DATABASE_URL ?? "file:./dev.db";
+  // On Vercel only /tmp is writable; locally use ./dev.db
+  const defaultUrl =
+    process.env.VERCEL ? "file:///tmp/radar.db" : "file:./dev.db";
+  const url = process.env.DATABASE_URL ?? defaultUrl;
   const adapter = new PrismaLibSql({ url });
   return new PrismaClient({ adapter });
 }
