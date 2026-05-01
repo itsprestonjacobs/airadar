@@ -70,8 +70,8 @@ export default function UserMenu() {
 
       {menuOpen && (
         <div
-          className="absolute right-0 mt-2 w-48 rounded-xl py-1 z-40 shadow-xl"
-          style={{ background: "var(--bg-panel)", border: "1px solid var(--border)" }}
+          className="absolute right-0 mt-2 w-48 rounded-xl py-1 shadow-xl"
+          style={{ zIndex: 1100, background: "var(--bg-panel)", border: "1px solid var(--border)" }}
         >
           <div className="px-3 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
             <div className="flex items-center gap-1.5">

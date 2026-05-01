@@ -49,8 +49,8 @@ export default function AuthModal({ onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: "rgba(4,8,18,0.85)", backdropFilter: "blur(6px)" }}
+      className="fixed inset-0 flex items-center justify-center p-4"
+      style={{ zIndex: 2000, background: "rgba(4,8,18,0.85)", backdropFilter: "blur(6px)" }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
