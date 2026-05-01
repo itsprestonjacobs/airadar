@@ -5,7 +5,7 @@ import { prisma } from "./prisma";
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "sqlite" }),
 
-  // Fallback secret for local dev — set BETTER_AUTH_SECRET in prod
+  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
   secret: process.env.BETTER_AUTH_SECRET ?? "local-dev-secret-change-in-production",
 
   emailAndPassword: {
