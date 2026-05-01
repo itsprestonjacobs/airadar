@@ -11,7 +11,7 @@ config({ path: ".env.local" });
 config(); // fallback to .env
 import { PrismaLibSql } from "@prisma/adapter-libsql";
 import { PrismaClient } from "../app/generated/prisma/client";
-import bcrypt from "bcryptjs";
+import { hashPassword } from "@better-auth/utils/password";
 import { ADMIN_EMAILS } from "../lib/admins";
 
 async function main() {
@@ -20,7 +20,7 @@ async function main() {
   const prisma = new PrismaClient({ adapter });
 
   const password = process.env.ADMIN_PASSWORD ?? "change-me-now";
-  const hash = await bcrypt.hash(password, 10);
+  const hash = await hashPassword(password);
 
   for (const email of ADMIN_EMAILS) {
     const existing = await prisma.user.findUnique({ where: { email } });
