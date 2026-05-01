@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "@/lib/auth-client";
 import AuthModal from "./AuthModal";
+import { ADMIN_EMAILS } from "@/lib/admins";
 
 export default function UserMenu() {
   const { data: session, isPending } = useSession();
@@ -41,6 +42,7 @@ export default function UserMenu() {
   }
 
   const user = session.user;
+  const admin = ADMIN_EMAILS.includes((user.email ?? "").toLowerCase());
   const initials = user.name
     ? user.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
     : user.email[0].toUpperCase();
@@ -72,7 +74,14 @@ export default function UserMenu() {
           style={{ background: "var(--bg-panel)", border: "1px solid var(--border)" }}
         >
           <div className="px-3 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
-            <p className="text-sm font-medium truncate" style={{ color: "var(--text-primary)" }}>{user.name}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="text-sm font-medium truncate" style={{ color: "var(--text-primary)" }}>{user.name}</p>
+              {admin && (
+                <span className="text-xs px-1.5 py-0.5 rounded-full font-bold shrink-0" style={{ background: "#1e3a5f", color: "#60a5fa" }}>
+                  Admin
+                </span>
+              )}
+            </div>
             <p className="text-xs truncate" style={{ color: "var(--text-dim)" }}>{user.email}</p>
           </div>
           <Link
@@ -91,6 +100,19 @@ export default function UserMenu() {
           >
             ⚙️ Settings
           </Link>
+          {admin && (
+            <>
+              <div style={{ borderTop: "1px solid var(--border)" }} />
+              <Link
+                href="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-2 text-sm hover:opacity-70"
+                style={{ color: "#60a5fa" }}
+              >
+                🛠️ Admin dashboard
+              </Link>
+            </>
+          )}
           <div style={{ borderTop: "1px solid var(--border)" }} />
           <button
             onClick={async () => { setMenuOpen(false); await signOut(); }}
